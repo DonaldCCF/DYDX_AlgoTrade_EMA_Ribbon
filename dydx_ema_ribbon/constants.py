@@ -1,4 +1,4 @@
-from constants import API_HOST_GOERLI, API_HOST_MAINNET
+from dydx3.constants import API_HOST_GOERLI, API_HOST_MAINNET
 from decouple import config
 
 # MODE = "PRODUCTION"
