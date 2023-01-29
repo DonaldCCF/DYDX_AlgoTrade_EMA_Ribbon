@@ -30,26 +30,26 @@ if __name__ == "__main__":
             exit(1)
 
     # # Run as always on
-    while True:
+    # while True:
 
-        position = get_holding_position(client, MARKET)
+    position = get_holding_position(client, MARKET)
 
-        # Manage trades for opening positions
-        if position != 0:
-            try:
-                print("Managing exits...")
-                manage_trade_exits(client, position)
-            except Exception as e:
-                print("Error managing exiting positions: ", e)
-                send_message(f"Error managing exiting positions {e}")
-                exit(1)
+    # Manage trades for opening positions
+    if position != 0:
+        try:
+            print("Managing exits...")
+            manage_trade_exits(client, position)
+        except Exception as e:
+            print("Error managing exiting positions: ", e)
+            send_message(f"Error managing exiting positions {e}")
+            exit(1)
 
-        # Place trades for opening positions
-        if position == 0:
-            try:
-                print("Detecting trading signal...")
-                open_positions(client)
-            except Exception as e:
-                print("Error opening trades: ", e)
-                send_message(f"Error opening trades {e}")
-                exit(1)
+    # Place trades for opening positions
+    if position == 0:
+        try:
+            print("Detecting trading signal...")
+            open_positions(client)
+        except Exception as e:
+            print("Error opening trades: ", e)
+            send_message(f"Error opening trades {e}")
+            exit(1)
