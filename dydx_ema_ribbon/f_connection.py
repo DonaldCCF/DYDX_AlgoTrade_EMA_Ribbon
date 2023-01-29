@@ -1,7 +1,7 @@
 from decouple import config
 from dydx3 import Client
 from web3 import Web3
-from dydx_tbpy.constants import (
+from constants import (
     HOST,
     ETHEREUM_ADDRESS,
     DYDX_API_KEY,
