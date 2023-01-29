@@ -1,6 +1,7 @@
 from f_utils import format_number, convert_time
 from f_public import get_candles_historical
 from f_private import place_market_order, is_open_positions
+from f_messaging import send_message
 from constants import MARKET, RESOLUTION, STOP_LOSS, ATR_MULTIPLIER
 import pandas_ta as ta
 from datetime import timedelta
@@ -78,13 +79,18 @@ def manage_trade_exits(client, pos):
 
     # Close positions if triggered
     if is_open:
+        exchange_pos = client.private.get_positions(status="OPEN")
+        all_exc_pos = pd.DataFrame(exchange_pos.data["positions"])
+        entry_price = all_exc_pos["entryPrice"].loc[all_exc_pos.market == MARKET].astype(str).astype(float)
+        side = all_exc_pos["side"][0]
+        size = all_exc_pos["size"].astype(float)[0]
+
         side, price = exit_signal(client, pos)
         if side == "":
             print("No exit signal...")
+            send_message(f"No exit signal... Last Price: {price}. Side: {side}, Price: {entry_price}, Size: {size}")
             return
-        exchange_pos = client.private.get_positions(status="OPEN", market=MARKET)
-        all_exc_pos = pd.DataFrame(exchange_pos.data["positions"]).astype(str)
-        size = all_exc_pos["size"].astype(float)[0]
+
         accept_price = price * 1.05 if side == "BUY" else price * 0.95
         tick_size = markets["markets"][MARKET]["tickSize"]
         accept_price = format_number(accept_price, tick_size)
@@ -110,6 +116,9 @@ def manage_trade_exits(client, pos):
 
             # Protect API
             time.sleep(1)
+
+            send_message(f"Exit signal detected! Closing position... "
+                         f"Last Price: {price}. Side: {side}, Price: {entry_price}, Size: {size}")
 
         except Exception as e:
             print(f"Exit failed for {MARKET}")

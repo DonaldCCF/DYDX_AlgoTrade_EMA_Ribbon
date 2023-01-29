@@ -1,9 +1,10 @@
 from constants import USD_PER_TRADE, USD_MIN_COLLATERAL, \
     RESOLUTION, MARKET, WINDOW1, WINDOW2, WINDOW3, WINDOW4
-from f_utils import format_number
+from f_utils import format_number,convert_time
 from f_public import get_candles_recent
 from f_private import is_open_positions
 from f_bot_agent import BotAgent
+from f_messaging import send_message
 import pandas_ta as ta
 import pandas as pd
 import json
@@ -47,7 +48,7 @@ def open_positions(client):
 
     markets = client.public.get_markets().data
 
-    # Initialize container for Botagent results
+    # Initialize container for BotAgent results
     bot_agents = []
 
     is_open = is_open_positions(client, MARKET)
@@ -57,6 +58,7 @@ def open_positions(client):
         side, price = entry_signal(client)
         if side == "":
             print("No entry signal...")
+            send_message("No entry signal...")
             return
         # Get acceptable price in string format with correct number of decimals
         accept_price = float(price) * 1.01 if side == "BUY" else float(price) * 0.99
@@ -100,7 +102,6 @@ def open_positions(client):
 
             # Open Trades
             bot_open_dict = bot_agent.open_trades()
-
             # Handle success in opening trades
             if bot_open_dict["order_status"] == "LIVE":
                 # Append to list of bot agents
@@ -110,6 +111,16 @@ def open_positions(client):
                 # Confirm live status in print
                 print("Trade status: Live")
                 print("---")
+
+            exchange_pos = client.private.get_positions(status="OPEN")
+            all_exc_pos = pd.DataFrame(exchange_pos.data["positions"])
+
+            if len(all_exc_pos) > 0:
+                entry_price = all_exc_pos["entryPrice"].loc[all_exc_pos.market == MARKET].astype(str).astype(float)
+                entry_time = convert_time(pd.to_datetime(all_exc_pos["createdAt"][0]))
+                side = all_exc_pos["side"][0]
+                size = all_exc_pos["size"].astype(float)[0]
+                send_message(f"Open {side}! Entry Time: {entry_time}, Price: {entry_price}, Size: {size}")
 
     # Save agents
     print(f"Success: Manage open trades checked")
