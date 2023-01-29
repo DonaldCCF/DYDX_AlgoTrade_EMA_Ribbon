@@ -1,4 +1,4 @@
-from dydx_tbpy.f_private import place_market_order, check_order_status
+from f_private import place_market_order, check_order_status
 from datetime import datetime
 import time
 

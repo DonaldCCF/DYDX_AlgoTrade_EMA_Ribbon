@@ -1,6 +1,6 @@
-from dydx_tbpy.f_connection import connect_dydx
-from dydx_tbpy.f_messaging import send_message
-from dydx_tbpy.f_private import abort_all_positions, get_holding_position
+from f_connection import connect_dydx
+from f_messaging import send_message
+from f_private import abort_all_positions, get_holding_position
 from f_entry import open_positions
 from f_exit import manage_trade_exits
 from constants import ABORT_ALL_POSITIONS, MANAGE_EXITS, PLACE_TRADES, MARKET

@@ -1,6 +1,6 @@
-from dydx_tbpy.f_utils import format_number, convert_time
-from dydx_tbpy.f_public import get_candles_historical
-from dydx_tbpy.f_private import place_market_order, is_open_positions
+from f_utils import format_number, convert_time
+from f_public import get_candles_historical
+from f_private import place_market_order, is_open_positions
 from constants import MARKET, RESOLUTION, STOP_LOSS, ATR_MULTIPLIER
 import pandas_ta as ta
 from datetime import timedelta

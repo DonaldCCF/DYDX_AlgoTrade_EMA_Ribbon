@@ -1,4 +1,4 @@
-from dydx_tbpy.f_utils import get_ISO_times, convert_time
+from f_utils import get_ISO_times, convert_time
 from datetime import timedelta
 import pandas as pd
 import numpy as np

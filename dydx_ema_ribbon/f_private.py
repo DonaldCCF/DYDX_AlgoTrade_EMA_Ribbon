@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from dydx_tbpy.f_utils import format_number
+from f_utils import format_number
 import time
 import json
 import pandas as pd

@@ -1,8 +1,8 @@
 from constants import USD_PER_TRADE, USD_MIN_COLLATERAL, \
     RESOLUTION, MARKET, WINDOW1, WINDOW2, WINDOW3, WINDOW4
-from dydx_tbpy.f_utils import format_number
-from dydx_tbpy.f_public import get_candles_recent
-from dydx_tbpy.f_private import is_open_positions
+from f_utils import format_number
+from f_public import get_candles_recent
+from f_private import is_open_positions
 from f_bot_agent import BotAgent
 import pandas_ta as ta
 import pandas as pd
