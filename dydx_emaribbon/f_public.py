@@ -56,7 +56,7 @@ def get_candles_historical(client, market, resolution, entry_time):
         to_iso = tf_obj["to_iso"]
         # Protect rate limits
         time.sleep(0.2)
-
+        print(from_iso, to_iso)
         # Get data
         candles = client.public.get_candles(
             market=market,
