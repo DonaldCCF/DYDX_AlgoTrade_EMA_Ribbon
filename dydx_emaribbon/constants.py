@@ -4,15 +4,6 @@ from decouple import config
 # MODE = "PRODUCTION"
 MODE = "DEVELOPMENT"
 
-# Close all open positions and orders
-ABORT_ALL_POSITIONS = False
-
-# Manage Exits
-MANAGE_EXITS = True
-
-# Place Trades
-PLACE_TRADES = True
-
 # Resolution: Can be one of 1DAY, 4HOURS, 1HOUR, 30MINS, 15MINS, 5MINS, 1MIN.
 RESOLUTION = "5MINS"
 
