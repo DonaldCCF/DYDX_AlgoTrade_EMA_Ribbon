@@ -42,8 +42,9 @@ def calculate_bull_bear(client, position):
         data = get_candles_historical(client, MARKET, RESOLUTION, entry_time).astype(float)
         last_price = data['close'][-1]
         atr = ta.atr(data['high'], data['low'], data['close'])
-
+        
         if position == 1:
+            send_message(f"Current Position: Long, {entry_price}")
             if (entry_price[0] - last_price) / entry_price[0] - 1 > STOP_LOSS:
                 signal = -1
 
@@ -54,6 +55,7 @@ def calculate_bull_bear(client, position):
                 signal = -1
 
         else:
+            send_message(f"Current Position: Short, {entry_price}")
             if (last_price - entry_price[0]) / entry_price[0] - 1 > STOP_LOSS:
                 signal = 1
 
