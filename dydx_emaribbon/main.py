@@ -26,7 +26,7 @@ if __name__ == "__main__":
     bull_or_bear = calculate_bull_bear(client, holding_position)
 
     # Place trades for opening positions
-    if holding_position == 0:
+    if holding_position != 0:
         if bull_or_bear == -1:
             print('[Strategy Signal] Short signal, Close the long position.')
             send_message('[Strategy Signal] Short signal, Close the long position.')
@@ -40,7 +40,7 @@ if __name__ == "__main__":
             send_message('[Strategy Signal] No entry signal, Continue waiting...')
 
     # Manage trades for opening positions
-    if holding_position != 0:
+    if holding_position == 0:
         if bull_or_bear == 1:
             print('[Strategy Signal] Long signal, Create a buy order...')
             send_message('[Strategy Signal] Long signal, Create a buy order...')
