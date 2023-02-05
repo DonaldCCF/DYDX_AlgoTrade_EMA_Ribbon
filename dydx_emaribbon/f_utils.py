@@ -40,7 +40,7 @@ def get_ISO_times(entry_time, resolution):
 
     # Get timestamps
     for i in range(0, int(total_call)):
-        date_start.append(date_start[-1] - timedelta(days=100))
+        date_start.append(date_start[-1] - timedelta(minutes=100))
 
     # Format datetimes
     times_dict = {}
