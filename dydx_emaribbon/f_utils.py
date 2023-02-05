@@ -55,6 +55,6 @@ def get_ISO_times(entry_time, resolution):
 
 
 def convert_time(time):
-    con_time = time.strftime("%d-%m-%Y %H:%M:%S")
+    con_time = time.strftime("%Y-%m-%d %H:%M:%S")
     con_time = pd.to_datetime(con_time)
     return con_time
