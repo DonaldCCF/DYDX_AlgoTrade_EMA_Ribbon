@@ -45,7 +45,7 @@ def calculate_bull_bear(client, position):
         atr = ta.atr(data['high'], data['low'], data['close'])
         
         if position == 1:
-            send_message(f"Current Position: Long, {entry_price}")
+            send_message(f"Current Position: Long, {entry_price[0]}")
             if (entry_price[0] - last_price) / entry_price[0] - 1 > STOP_LOSS:
                 signal = -1
 
@@ -56,7 +56,7 @@ def calculate_bull_bear(client, position):
                 signal = -1
 
         else:
-            send_message(f"Current Position: Short, {entry_price}")
+            send_message(f"Current Position: Short, {entry_price[0]}")
             if (last_price - entry_price[0]) / entry_price[0] - 1 > STOP_LOSS:
                 signal = 1
 
