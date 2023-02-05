@@ -36,7 +36,7 @@ if __name__ == "__main__":
             send_message('[Strategy Signal] Long signal, Close the short position.')
             close_position(client, 'BUY')
         if bull_or_bear == 0:
-            print('[Strategy Signal] No entry signal, Continue waiting...')
+            print('[Strategy Signal] No exit signal, Continue waiting...')
             send_message('[Strategy Signal] No exit signal, Continue waiting...')
 
     # Manage trades for opening positions
@@ -50,5 +50,5 @@ if __name__ == "__main__":
             send_message('[Strategy Signal] Short signal, Create a sell order...')
             open_position(client, 'SELL')
         if bull_or_bear == 0:
-            print('[Strategy Signal] No exit signal, Continue waiting...')
+            print('[Strategy Signal] No entry signal, Continue waiting...')
             send_message('[Strategy Signal] No entry signal, Continue waiting...')
