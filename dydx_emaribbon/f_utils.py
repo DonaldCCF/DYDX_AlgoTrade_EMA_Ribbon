@@ -33,7 +33,7 @@ def get_ISO_times(entry_time, resolution):
     # Calculate candles needed
     now = convert_time(datetime.now() - timedelta(seconds=28800))
     time_diff = now - entry_time
-    diff = math.ceil(time_diff.total_seconds() / (60*60*12))
+    diff = math.ceil(time_diff.total_seconds() / (60*5))
     near_100 = int(math.ceil(diff / 100.0)) * 100
     total_call = near_100 / 100
     date_start = [now]
