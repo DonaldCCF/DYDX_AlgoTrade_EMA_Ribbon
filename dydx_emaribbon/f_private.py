@@ -83,7 +83,10 @@ def open_position(client, side):
 
     # Format prices
     accept_price = format_number(accept_price, tick_size)
-
+        
+    # Get size
+    account = client.private.get_account()
+    
     # USD_PER_TRADE = float(account.data["account"]["equity"]) * EQUITY_USED
     quantity = USD_PER_TRADE / price
     step_size = markets["markets"][MARKET]["stepSize"]
