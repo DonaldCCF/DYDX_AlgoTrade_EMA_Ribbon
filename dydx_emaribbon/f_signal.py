@@ -2,6 +2,7 @@ import time
 from constants import RESOLUTION, MARKET, WINDOW1, WINDOW2, WINDOW3, WINDOW4, STOP_LOSS, ATR_MULTIPLIER
 from f_utils import format_number, convert_time
 from f_public import get_candles_recent, get_candles_historical
+from f_messaging import send_message
 import pandas_ta as ta
 import pandas as pd
 
