@@ -46,7 +46,7 @@ def calculate_bull_bear(client, position):
         
         if position == 1:
             send_message(f"Current Position: Long, {entry_price[0]}")
-            if (entry_price[0] - last_price) / entry_price[0] - 1 > STOP_LOSS:
+            if (entry_price[0] - last_price) / entry_price[0] > STOP_LOSS:
                 signal = -1
 
             enti = pd.to_datetime(all_exc_pos["createdAt"][0])
@@ -57,7 +57,7 @@ def calculate_bull_bear(client, position):
 
         else:
             send_message(f"Current Position: Short, {entry_price[0]}")
-            if (last_price - entry_price[0]) / entry_price[0] - 1 > STOP_LOSS:
+            if (last_price - entry_price[0]) / entry_price[0] > STOP_LOSS:
                 signal = 1
 
             enti = pd.to_datetime(all_exc_pos["createdAt"][0])
