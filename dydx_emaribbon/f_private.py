@@ -141,9 +141,10 @@ def close_position(client, side):
     if is_open:
         exchange_pos = client.private.get_positions(status="OPEN")
         all_exc_pos = pd.DataFrame(exchange_pos.data["positions"])
-        entry_price = all_exc_pos["entryPrice"].loc[all_exc_pos.market == MARKET].astype(str).astype(float)
-        position = all_exc_pos["side"][0]
-        size = abs(all_exc_pos["size"].astype(float)[0])
+        
+        quantity = abs(all_exc_pos["size"].astype(float)[0])
+        step_size = markets["markets"][MARKET]["stepSize"]
+        size = format_number(quantity, step_size)
 
         accept_price = price * 1.1 if side == "BUY" else price * 0.9
         tick_size = markets["markets"][MARKET]["tickSize"]
